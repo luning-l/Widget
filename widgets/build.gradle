@@ -36,5 +36,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     api 'com.google.android.material:material:1.2.1'
-    api 'com.gitee.lu_n:UtilsX:0.0.1'
+
 }
