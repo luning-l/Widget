@@ -56,7 +56,7 @@ public class BannerLoopScaleHelper {
                 if (onPageChangeListener != null) {
                     onPageChangeListener.onScrolled(recyclerView, dx, dy);
                 }
-                onScrolledChangedCallback();
+//                onScrolledChangedCallback();
             }
         });
         initWidth();
@@ -93,7 +93,7 @@ public class BannerLoopScaleHelper {
             int count = getCount();
             if (count != 0) {
                 mCurrentPos = item % count;
-                onPageChangeListener.onPageSelected(mCurrentPos);
+//                onPageChangeListener.onPageSelected(mCurrentPos);
             }
         }
     }
@@ -131,7 +131,7 @@ public class BannerLoopScaleHelper {
      * RecyclerView位移事件监听, view大小随位移事件变化
      */
     private void onScrolledChangedCallback() {
-
+        onPageChangeListener.onPageSelected(mCurrentPos);
     }
 
     public int getCurrentItem() {
