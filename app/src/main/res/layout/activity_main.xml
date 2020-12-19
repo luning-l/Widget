@@ -27,7 +27,7 @@
             android:layout_height="0dp"
             app:autoTurningTime="2000"
             app:canLoop="true"
-            app:layout_constraintDimensionRatio="524:251"
+            app:layout_constraintDimensionRatio="500:350"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

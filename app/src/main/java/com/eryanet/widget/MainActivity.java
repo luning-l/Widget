@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState, @Nullable View contentView) {
         ButterKnife.bind(this);
-        setBar(true, ColorUtils.getRandomColor(), false);
+        setBar(true, ColorUtils.getRandomColor(), true);
     }
 
     @Override
@@ -131,6 +131,7 @@ public class MainActivity extends BaseActivity {
         bannerList.addAll(list);
 
         banner.notifyDataSetChanged();
+        banner.setPointViewVisible(bannerList != null && bannerList.size() > 1);
     }
 
     private void initRecyclerView() {
