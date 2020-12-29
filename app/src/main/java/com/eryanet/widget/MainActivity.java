@@ -97,10 +97,7 @@ public class MainActivity extends BaseActivity {
         if (bannerList == null) {
             bannerList = new ArrayList<>();
         }
-        banner.setIndicator(new RectangleIndicator(Utils.getApp()));
-        banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
-        banner.setIndicatorNormalWidth((int) BannerUtils.dp2px(15));
-        banner.setIndicatorRadius(0);
+
         banner.setImmediateCallBack(true);
         banner.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -129,6 +126,10 @@ public class MainActivity extends BaseActivity {
                         .into(holder.imageView);
             }
         });
+        banner.setIndicator(new RectangleIndicator(Utils.getApp()));
+        banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
+        banner.setIndicatorNormalWidth((int) BannerUtils.dp2px(15));
+        banner.setIndicatorRadius(0);
     }
 
     private void updateBanner(List<String> list) {
