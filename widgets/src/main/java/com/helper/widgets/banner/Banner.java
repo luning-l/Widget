@@ -101,9 +101,12 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
     // 是否要拦截事件
     private boolean isIntercept = true;
 
-    //绘制圆角视图
+    // 绘制圆角视图
     private Paint mRoundPaint;
     private Paint mImagePaint;
+
+    // 是否立即回调
+    private boolean isImmediateCallBack = false;
 
     @Retention(SOURCE)
     @IntDef( {HORIZONTAL, VERTICAL})
@@ -351,7 +354,8 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
         @Override
         public void onPageSelected(int position) {
-            if (isScrolled) {
+            if (isImmediateCallBack || isScrolled) {
+                isImmediateCallBack = false;
                 mTempPosition = position;
                 int realPosition = BannerUtils.getRealPosition(isInfiniteLoop(), position, getRealCount());
                 if (mOnPageChangeListener != null) {
@@ -701,7 +705,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
      * @param isInfiniteLoop 是否支持无限循环
      * @return
      */
-    public Banner setAdapter(BA adapter,boolean isInfiniteLoop) {
+    public Banner setAdapter(BA adapter, boolean isInfiniteLoop) {
         mIsInfiniteLoop=isInfiniteLoop;
         setInfiniteLoop();
         setAdapter(adapter);
@@ -762,6 +766,16 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
      */
     public Banner addOnPageChangeListener(OnPageChangeListener pageListener) {
         this.mOnPageChangeListener = pageListener;
+        return this;
+    }
+
+    /**
+     * 是否立即回调
+     * @param immediateCallBack
+     * @return
+     */
+    public Banner setImmediateCallBack(boolean immediateCallBack) {
+        this.isImmediateCallBack = immediateCallBack;
         return this;
     }
 

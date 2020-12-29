@@ -21,10 +21,13 @@ import com.helper.utils.BarUtils;
 import com.helper.utils.ColorUtils;
 import com.helper.utils.PermissionUtils;
 import com.helper.utils.ToastUtils;
+import com.helper.utils.Utils;
 import com.helper.widgets.banner.Banner;
 import com.helper.widgets.banner.adapter.BannerImageAdapter;
 import com.helper.widgets.banner.holder.BannerImageHolder;
+import com.helper.widgets.banner.indicator.RectangleIndicator;
 import com.helper.widgets.banner.indicator.RoundLinesIndicator;
+import com.helper.widgets.banner.listener.OnPageChangeListener;
 import com.helper.widgets.banner.util.BannerUtils;
 import com.helper.widgets.brvah.BaseQuickAdapter;
 import com.helper.widgets.brvah.BaseViewHolder;
@@ -94,19 +97,38 @@ public class MainActivity extends BaseActivity {
         if (bannerList == null) {
             bannerList = new ArrayList<>();
         }
+        banner.setIndicator(new RectangleIndicator(Utils.getApp()));
+        banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
+        banner.setIndicatorNormalWidth((int) BannerUtils.dp2px(15));
+        banner.setIndicatorRadius(0);
+        banner.setImmediateCallBack(true);
+        banner.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Logcat.e("onPageSelected: " + position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         banner.setAdapter(new BannerImageAdapter<DataBean>(DataBean.getTestData3()) {
-                    @Override
-                    public void onBindView(BannerImageHolder holder, DataBean data, int position, int size) {
-                        //图片加载自己实现
-                        Glide.with(holder.itemView)
-                                .load(data.imageUrl)
+            @Override
+            public void onBindView(BannerImageHolder holder, DataBean data, int position, int size) {
+                //图片加载自己实现
+                Glide.with(holder.itemView)
+                        .load(data.imageUrl)
 //                        .thumbnail(Glide.with(holder.itemView).load(R.drawable.loading))
-                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-                                .into(holder.imageView);
-                    }
-                })
-                .setIndicator(new RoundLinesIndicator(this))
-                .setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                        .into(holder.imageView);
+            }
+        });
     }
 
     private void updateBanner(List<String> list) {
