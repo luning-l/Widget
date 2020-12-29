@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.helper.base.BaseActivity;
 import com.helper.logging.Logcat;
 import com.helper.utils.BarUtils;
@@ -19,9 +22,10 @@ import com.helper.utils.ColorUtils;
 import com.helper.utils.PermissionUtils;
 import com.helper.utils.ToastUtils;
 import com.helper.widgets.banner.Banner;
-import com.helper.widgets.banner.holder.BannerViewHolder;
-import com.helper.widgets.banner.holder.BannerViewHolderCreator;
-import com.helper.widgets.banner.listener.OnPageChangeListener;
+import com.helper.widgets.banner.adapter.BannerImageAdapter;
+import com.helper.widgets.banner.holder.BannerImageHolder;
+import com.helper.widgets.banner.indicator.RoundLinesIndicator;
+import com.helper.widgets.banner.util.BannerUtils;
 import com.helper.widgets.brvah.BaseQuickAdapter;
 import com.helper.widgets.brvah.BaseViewHolder;
 
@@ -90,36 +94,19 @@ public class MainActivity extends BaseActivity {
         if (bannerList == null) {
             bannerList = new ArrayList<>();
         }
-        banner.setPages(new BannerViewHolderCreator() {
-            @Override
-            public int getLayoutId() {
-                return R.layout.banner_item;
-            }
-
-            @Override
-            public BannerViewHolder createHolder(View itemView) {
-                return new BannerViewHolderAdapter(itemView, getApplicationContext());
-            }
-        }, bannerList)
-                .setPageIndicator(new int[]{R.drawable.banner_point_n, R.drawable.banner_point_p}) //指示器圆点样式
-                .setPageIndicatorAlign(Banner.PageIndicatorAlign.CENTER_HORIZONTAL) //设置指示器的方向;
-                .setOnPageChangeListener(new OnPageChangeListener() {
+        banner.setAdapter(new BannerImageAdapter<DataBean>(DataBean.getTestData3()) {
                     @Override
-                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
+                    public void onBindView(BannerImageHolder holder, DataBean data, int position, int size) {
+                        //图片加载自己实现
+                        Glide.with(holder.itemView)
+                                .load(data.imageUrl)
+//                        .thumbnail(Glide.with(holder.itemView).load(R.drawable.loading))
+                                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                                .into(holder.imageView);
                     }
-
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-                    }
-
-                    @Override
-                    public void onPageSelected(int index) {
-                        Logcat.i("onPageSelected: " + index);
-                    }
-                });
-        banner.startTurning();
+                })
+                .setIndicator(new RoundLinesIndicator(this))
+                .setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
     }
 
     private void updateBanner(List<String> list) {
@@ -129,9 +116,6 @@ public class MainActivity extends BaseActivity {
         }
         bannerList.clear();
         bannerList.addAll(list);
-
-        banner.notifyDataSetChanged();
-        banner.setPointViewVisible(bannerList != null && bannerList.size() > 1);
     }
 
     private void initRecyclerView() {

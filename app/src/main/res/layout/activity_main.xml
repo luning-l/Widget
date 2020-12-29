@@ -21,15 +21,15 @@
         app:layout_constraintTop_toBottomOf="@id/statusBarCustomFakeStatusBar"
         app:layout_constraintVertical_weight="1">
 
-        <com.helper.widgets.banner.Banner
+        <com.helper.widgets.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:autoTurningTime="2000"
-            app:canLoop="true"
             app:layout_constraintDimensionRatio="524:251"
-            app:layout_constraintTop_toTopOf="parent" />
-<!--        app:layout_constraintDimensionRatio="500:350"-->
+            app:layout_constraintTop_toTopOf="parent"
+            banner:banner_auto_loop="false"
+            banner:banner_indicator_normal_color="@android:color/white"
+            banner:banner_indicator_selected_color="@color/colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
