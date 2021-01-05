@@ -27,7 +27,7 @@
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="524:251"
             app:layout_constraintTop_toTopOf="parent"
-            banner:banner_auto_loop="true"
+            banner:banner_auto_loop="false"
             banner:banner_indicator_normal_color="@android:color/white"
             banner:banner_indicator_selected_color="@color/colorPrimary" />
 

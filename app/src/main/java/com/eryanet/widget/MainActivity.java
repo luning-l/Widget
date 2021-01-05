@@ -26,7 +26,6 @@ import com.helper.widgets.banner.Banner;
 import com.helper.widgets.banner.adapter.BannerImageAdapter;
 import com.helper.widgets.banner.holder.BannerImageHolder;
 import com.helper.widgets.banner.indicator.RectangleIndicator;
-import com.helper.widgets.banner.indicator.RoundLinesIndicator;
 import com.helper.widgets.banner.listener.OnPageChangeListener;
 import com.helper.widgets.banner.util.BannerUtils;
 import com.helper.widgets.brvah.BaseQuickAdapter;
@@ -98,6 +97,7 @@ public class MainActivity extends BaseActivity {
             bannerList = new ArrayList<>();
         }
 
+
         banner.setImmediateCallBack(true);
         banner.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -130,6 +130,11 @@ public class MainActivity extends BaseActivity {
         banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
         banner.setIndicatorNormalWidth((int) BannerUtils.dp2px(15));
         banner.setIndicatorRadius(0);
+        banner.setOnBannerListener((data, position) -> {
+            Logcat.i("OnBannerClick: " + position);
+            ToastUtils.showShort("" + position);
+        });
+        banner.setUserInputEnabled(true);
     }
 
     private void updateBanner(List<String> list) {
