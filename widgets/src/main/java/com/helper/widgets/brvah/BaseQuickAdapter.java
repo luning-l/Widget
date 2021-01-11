@@ -997,7 +997,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
 
         switch (viewType) {
             case 0:
-                convert(holder, getItem(position - getHeaderLayoutCount()));
+                convert(holder, position, getItem(position - getHeaderLayoutCount()));
                 break;
             case LOADING_VIEW:
                 mLoadMoreView.convert(holder);
@@ -1009,7 +1009,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
             case FOOTER_VIEW:
                 break;
             default:
-                convert(holder, getItem(position - getHeaderLayoutCount()));
+                convert(holder, position, getItem(position - getHeaderLayoutCount()));
                 break;
         }
     }
@@ -1697,7 +1697,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
      * @param holder A fully initialized holder.
      * @param item   The item that needs to be displayed.
      */
-    protected abstract void convert(@NonNull K holder, T item);
+    protected abstract void convert(@NonNull K holder, int position, T item);
 
     /**
      * Optional implementation this method and use the helper to adapt the view to the given item.

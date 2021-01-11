@@ -88,7 +88,7 @@ public abstract class MultipleItemRvAdapter<T, V extends BaseViewHolder> extends
     }
 
     @Override
-    protected void convert(@NonNull V helper, T item) {
+    protected void convert(@NonNull V helper, int pos, T item) {
         int itemViewType = helper.getItemViewType();
         BaseItemProvider provider = mItemProviders.get(itemViewType);
 

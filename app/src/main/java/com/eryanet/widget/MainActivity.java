@@ -156,7 +156,7 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(gridLayoutManager);
         baseQuickAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_main_rv, list) {
             @Override
-            protected void convert(@NonNull BaseViewHolder holder, String item) {
+            protected void convert(@NonNull BaseViewHolder holder, int position, String item) {
                 holder.setText(R.id.tv_text, item);
             }
         };

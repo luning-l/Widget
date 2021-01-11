@@ -208,15 +208,16 @@ public class DraggableController implements IDraggableListener {
         int to = getViewHolderPosition(target);
 
         if (inRange(from) && inRange(to)) {
-            if (from < to) {
-                for (int i = from; i < to; i++) {
-                    Collections.swap(mAdapter.getData(), i, i + 1);
-                }
-            } else {
-                for (int i = from; i > to; i--) {
-                    Collections.swap(mAdapter.getData(), i, i - 1);
-                }
-            }
+//            if (from < to) {
+//                for (int i = from; i < to; i++) {
+//                    Collections.swap(mAdapter.getData(), i, i + 1);
+//                }
+//            } else {
+//                for (int i = from; i > to; i--) {
+//                    Collections.swap(mAdapter.getData(), i, i - 1);
+//                }
+//            }
+            Collections.swap(mAdapter.getData(), from, to);
             mAdapter.notifyItemMoved(source.getAdapterPosition(), target.getAdapterPosition());
         }
 
