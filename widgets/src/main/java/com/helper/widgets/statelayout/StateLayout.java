@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.IntDef;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.helper.widgets.R;
+import com.helper.widgets.statelayout.anim.ViewAnimProvider;
+import com.helper.widgets.statelayout.helper.AnimationHelper;
 
 public class StateLayout extends FrameLayout implements IShowView {
     public static final int LOGIN = 1;
@@ -34,6 +37,9 @@ public class StateLayout extends FrameLayout implements IShowView {
     private View loginView;
 
     private View currentShowingView;
+    private boolean useAnimation = true;
+    private ViewAnimProvider viewAnimProvider;
+    private OnViewRefreshListener mListener;
 
     public StateLayout(@NonNull Context context) {
         this(context, null);
@@ -91,6 +97,7 @@ public class StateLayout extends FrameLayout implements IShowView {
                 break;
         }
         addView(view);
+        view.setVisibility(GONE);
     }
 
     private void checkIsContentView(View view) {
@@ -108,43 +115,123 @@ public class StateLayout extends FrameLayout implements IShowView {
         super.addView(child);
     }
 
+//    @Override
+//    public void addView(View child, int index) {
+//        checkIsContentView(child);
+//        super.addView(child, index);
+//    }
+//
+//    @Override
+//    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+//        checkIsContentView(child);
+//        super.addView(child, index, params);
+//    }
+//
+//    @Override
+//    public void addView(View child, ViewGroup.LayoutParams params) {
+//        checkIsContentView(child);
+//        super.addView(child, params);
+//    }
+//
+//    @Override
+//    public void addView(View child, int width, int height) {
+//        checkIsContentView(child);
+//        super.addView(child, width, height);
+//    }
+//
+//    @Override
+//    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params) {
+//        checkIsContentView(child);
+//        return super.addViewInLayout(child, index, params);
+//    }
+//
+//    @Override
+//    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
+//        checkIsContentView(child);
+//        return super.addViewInLayout(child, index, params, preventRequestLayout);
+//    }
+
     @Override
     public void showLoginView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, loginView);
+        currentShowingView = loginView;
     }
 
     @Override
     public void showLoadingView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, loadingView);
+        currentShowingView = loadingView;
     }
 
     @Override
     public void showTimeoutView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, timeOutView);
+        currentShowingView = timeOutView;
     }
 
     @Override
     public void showEmptyView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, emptyView);
+        currentShowingView = emptyView;
     }
 
     @Override
     public void showErrorView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, errorView);
+        currentShowingView = errorView;
     }
 
     @Override
     public void showNoNetworkView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, notNetworkView);
+        currentShowingView = notNetworkView;
     }
 
     @Override
     public void showContentView() {
-
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, contentView);
+        currentShowingView = contentView;
     }
 
     @Override
     public void showCustomView(View view) {
-
+        view.setLayoutParams(this.getLayoutParams());
+        AnimationHelper.switchViewByAnim(useAnimation, viewAnimProvider, currentShowingView, view);
+        currentShowingView = view;
     }
+
+
+    public boolean isUseAnimation() {
+        return useAnimation;
+    }
+
+    public void setUseAnimation(boolean useAnimation) {
+        this.useAnimation = useAnimation;
+    }
+
+    public void setViewSwitchAnimProvider(ViewAnimProvider animProvider) {
+        if (animProvider != null) {
+            this.viewAnimProvider = animProvider;
+        }
+    }
+
+    public ViewAnimProvider getViewAnimProvider() {
+        return viewAnimProvider;
+    }
+
+    public interface OnViewRefreshListener {
+        //刷新界面
+        void refreshClick();
+        //登录点击
+        void loginClick();
+    }
+
+    public OnViewRefreshListener getRefreshLListener() {
+        return mListener;
+    }
+
+    public void setRefreshListener(OnViewRefreshListener listener) {
+        this.mListener = listener;
+    }
+
 }
