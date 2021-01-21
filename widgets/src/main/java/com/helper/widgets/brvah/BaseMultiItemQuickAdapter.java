@@ -7,11 +7,11 @@ import androidx.annotation.IntRange;
 import androidx.annotation.LayoutRes;
 
 import com.helper.widgets.brvah.entity.IExpandable;
-import com.helper.widgets.brvah.entity.MultiItemEntity;
+import com.helper.widgets.brvah.entity.MultiItem;
 
 import java.util.List;
 
-public abstract class BaseMultiItemQuickAdapter<T extends MultiItemEntity, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
+public abstract class BaseMultiItemQuickAdapter<T extends MultiItem, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
 
     /**
      * layouts indexed with their types
@@ -83,7 +83,7 @@ public abstract class BaseMultiItemQuickAdapter<T extends MultiItemEntity, K ext
      */
     protected void removeAllChild(IExpandable parent, int parentPosition) {
         if (parent.isExpanded()) {
-            List<MultiItemEntity> chidChilds = parent.getSubItems();
+            List<MultiItem> chidChilds = parent.getSubItems();
             if (chidChilds == null || chidChilds.size() == 0) return;
 
             int childSize = chidChilds.size();
@@ -117,19 +117,19 @@ public abstract class BaseMultiItemQuickAdapter<T extends MultiItemEntity, K ext
      */
     public int getParentPositionInAll(int position) {
         List<T> data = getData();
-        MultiItemEntity multiItemEntity = getItem(position);
+        MultiItem multiItem = getItem(position);
 
-        if (isExpandable(multiItemEntity)) {
-            IExpandable IExpandable = (com.helper.widgets.brvah.entity.IExpandable) multiItemEntity;
+        if (isExpandable(multiItem)) {
+            IExpandable IExpandable = (com.helper.widgets.brvah.entity.IExpandable) multiItem;
             for (int i = position - 1; i >= 0; i--) {
-                MultiItemEntity entity = data.get(i);
+                MultiItem entity = data.get(i);
                 if (isExpandable(entity) && IExpandable.getLevel() > ((com.helper.widgets.brvah.entity.IExpandable) entity).getLevel()) {
                     return i;
                 }
             }
         } else {
             for (int i = position - 1; i >= 0; i--) {
-                MultiItemEntity entity = data.get(i);
+                MultiItem entity = data.get(i);
                 if (isExpandable(entity)) {
                     return i;
                 }
@@ -138,7 +138,7 @@ public abstract class BaseMultiItemQuickAdapter<T extends MultiItemEntity, K ext
         return -1;
     }
 
-    public boolean isExpandable(MultiItemEntity item) {
+    public boolean isExpandable(MultiItem item) {
         return item != null && item instanceof IExpandable;
     }
 }

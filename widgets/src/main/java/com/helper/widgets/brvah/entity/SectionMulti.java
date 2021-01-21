@@ -2,19 +2,19 @@ package com.helper.widgets.brvah.entity;
 
 import java.io.Serializable;
 
-public abstract class SectionMultiEntity<T> implements Serializable, MultiItemEntity {
+public abstract class SectionMulti<T> implements Serializable, MultiItem {
 
     public boolean isHeader;
     public T t;
     public String header;
 
-    public SectionMultiEntity(boolean isHeader, String header) {
+    public SectionMulti(boolean isHeader, String header) {
         this.isHeader = isHeader;
         this.header = header;
         this.t = null;
     }
 
-    public SectionMultiEntity(T t) {
+    public SectionMulti(T t) {
         this.isHeader = false;
         this.header = null;
         this.t = t;
