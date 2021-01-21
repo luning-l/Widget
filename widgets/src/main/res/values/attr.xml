@@ -36,4 +36,19 @@
         <attr name="banner_radius" format="dimension"/>
 
     </declare-styleable>
+
+    <declare-styleable name="StateLayout">
+        <!-- 错误提示布局 -->
+        <attr name="errorLayout" format="reference" />
+        <!-- 空数据提示布局 -->
+        <attr name="emptyLayout" format="reference" />
+        <!-- 没有网络提示布局 -->
+        <attr name="noNetworkLayout" format="reference" />
+        <!-- 超时提示布局 -->
+        <attr name="timeOutLayout" format="reference" />
+        <!-- 登录提示布局 -->
+        <attr name="loginLayout" format="reference" />
+        <!-- 加载提示布局 -->
+        <attr name="loadingLayout" format="reference" />
+    </declare-styleable>
 </resources>

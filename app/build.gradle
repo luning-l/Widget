@@ -38,6 +38,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.gitee.lu_n:UtilsX:0.0.1'
     implementation 'com.gitee.lu_n:logcat:0.0.1'
-    implementation project(':widgets')
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation project(':widgets')
 }
