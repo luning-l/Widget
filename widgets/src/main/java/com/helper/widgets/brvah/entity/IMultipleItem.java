@@ -1,6 +1,6 @@
 package com.helper.widgets.brvah.entity;
 
-public interface MultiItem {
+public interface IMultipleItem {
     int getItemType();
     int getSpanSize();
 }

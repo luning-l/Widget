@@ -1,18 +1,18 @@
 package com.helper.widgets.brvah.entity;
 
-public class MultipleItemImpl<T> implements MultiItem {
+public class MultipleItemEntity<T> implements IMultipleItem {
 
     private int itemType;
     private int spanSize;
     public T t;
 
-    public MultipleItemImpl(int itemType, int spanSize) {
+    public MultipleItemEntity(int itemType, int spanSize) {
         this.itemType = itemType;
         this.spanSize = spanSize;
         this.t = null;
     }
 
-    public MultipleItemImpl(int itemType, int spanSize, T t) {
+    public MultipleItemEntity(int itemType, int spanSize, T t) {
         this.itemType = itemType;
         this.spanSize = spanSize;
         this.t = t;

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.helper.widgets.brvah.BaseSectionMultiItemQuickAdapter;
 import com.helper.widgets.brvah.BaseViewHolder;
-import com.helper.widgets.brvah.entity.SectionMulti;
+import com.helper.widgets.brvah.entity.SectionMultipleEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 应用于RecyclerView的GridLayoutManager，水平方向上固定间距大小，从而使条目宽度自适应。<br>
  * 配合Brvah的SectionMulti使用，不对Head生效，仅对每个Head的子Grid列表生效<br>
- * 使用{@link #addSectionDecoration(int, SectionDecoration)}方法来增加对应的section定义，key值对应{@link SectionMulti#getItemType()}<br>
+ * 使用{@link #addSectionDecoration(int, SectionDecoration)}方法来增加对应的section定义，key值对应{@link SectionMultipleEntity#getItemType()}<br>
  * 使用{@link #setLastSectionBottomMarginDp(float)}来定义最后一个section中最后一行的底部间距，设置后会覆盖最后一个section的底部间距<br>
  * Section Grid中Item的宽度应设为MATCH_PARAENT<br>
  */
@@ -169,13 +169,13 @@ public class GridSectionMultiAvgGapItemDecoration extends RecyclerView.ItemDecor
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         if (parent.getAdapter() instanceof BaseSectionMultiItemQuickAdapter) {
             GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
-            BaseSectionMultiItemQuickAdapter<SectionMulti, BaseViewHolder> adapter = (BaseSectionMultiItemQuickAdapter) parent.getAdapter();
+            BaseSectionMultiItemQuickAdapter<SectionMultipleEntity, BaseViewHolder> adapter = (BaseSectionMultiItemQuickAdapter) parent.getAdapter();
             if (baseMultiItemQuickAdapter != adapter) {
                 setUpWithMultiItemAdapter(adapter);
             }
             int spanCount = layoutManager.getSpanCount();
             int position = parent.getChildAdapterPosition(view);
-            SectionMulti entity = adapter.getItem(position);
+            SectionMultipleEntity entity = adapter.getItem(position);
 
             SectionDecoration sectionDecoration = entity != null ? sectionDecorationMap.get(entity.getItemType()) : null;
             if ((entity != null && entity.isHeader) || sectionDecoration == null) {
@@ -230,7 +230,7 @@ public class GridSectionMultiAvgGapItemDecoration extends RecyclerView.ItemDecor
 
     }
 
-    private void setUpWithMultiItemAdapter(BaseSectionMultiItemQuickAdapter<SectionMulti, BaseViewHolder> adapter) {
+    private void setUpWithMultiItemAdapter(BaseSectionMultiItemQuickAdapter<SectionMultipleEntity, BaseViewHolder> adapter) {
         if (baseMultiItemQuickAdapter != null) {
             baseMultiItemQuickAdapter.unregisterAdapterDataObserver(mDataObserver);
         }
@@ -241,9 +241,9 @@ public class GridSectionMultiAvgGapItemDecoration extends RecyclerView.ItemDecor
 
     private void markSectionsForMultiSectionAdapter() {
         if (baseMultiItemQuickAdapter != null) {
-            BaseSectionMultiItemQuickAdapter<SectionMulti, BaseViewHolder> adapter = baseMultiItemQuickAdapter;
+            BaseSectionMultiItemQuickAdapter<SectionMultipleEntity, BaseViewHolder> adapter = baseMultiItemQuickAdapter;
             mSectionList.clear();
-            SectionMulti sectionEntity = null;
+            SectionMultipleEntity sectionEntity = null;
             Section section = new Section();
             for (int i = 0, size = adapter.getItemCount(); i < size; i++) {
                 sectionEntity = adapter.getItem(i);

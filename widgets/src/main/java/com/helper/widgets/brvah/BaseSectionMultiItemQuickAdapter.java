@@ -8,12 +8,12 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import com.helper.widgets.brvah.entity.IExpandable;
-import com.helper.widgets.brvah.entity.MultiItem;
-import com.helper.widgets.brvah.entity.SectionMulti;
+import com.helper.widgets.brvah.entity.IMultipleItem;
+import com.helper.widgets.brvah.entity.SectionMultipleEntity;
 
 import java.util.List;
 
-public abstract class BaseSectionMultiItemQuickAdapter<T extends SectionMulti, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
+public abstract class BaseSectionMultiItemQuickAdapter<T extends SectionMultipleEntity, K extends BaseViewHolder> extends BaseQuickAdapter<T, K> {
 
     /**
      * layouts indexed with their types
@@ -120,7 +120,7 @@ public abstract class BaseSectionMultiItemQuickAdapter<T extends SectionMulti, K
      */
     protected void removeAllChild(IExpandable parent, int parentPosition) {
         if (parent.isExpanded()) {
-            List<MultiItem> chidChilds = parent.getSubItems();
+            List<IMultipleItem> chidChilds = parent.getSubItems();
             if (chidChilds == null || chidChilds.size() == 0) return;
 
             int childSize = chidChilds.size();
