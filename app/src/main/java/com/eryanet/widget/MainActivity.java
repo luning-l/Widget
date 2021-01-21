@@ -97,7 +97,6 @@ public class MainActivity extends BaseActivity {
             bannerList = new ArrayList<>();
         }
 
-
         banner.setImmediateCallBack(true);
         banner.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
