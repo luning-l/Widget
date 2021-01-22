@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@id/container"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -21,25 +21,132 @@
         app:layout_constraintTop_toBottomOf="@id/statusBarCustomFakeStatusBar"
         app:layout_constraintVertical_weight="1">
 
-        <com.helper.widgets.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/banner"
+        <Button
+            android:id="@+id/btn_content"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="524:251"
-            app:layout_constraintTop_toTopOf="parent"
-            banner:banner_auto_loop="false"
-            banner:banner_indicator_normal_color="@android:color/white"
-            banner:banner_indicator_selected_color="@color/colorPrimary" />
+            android:layout_height="50dp"
+            android:text="content" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <LinearLayout
+            android:id="@+id/ll_button"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/banner"
-            app:layout_constraintVertical_weight="1"
-            tools:ignore="MissingConstraints" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="50dp"
+            android:layout_below="@+id/btn_content"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_empty"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="empty" />
 
+            <Button
+                android:id="@+id/btn_not_network"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="not network"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_error"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="error" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_button1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/ll_button"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_loading"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="loading" />
+
+            <Button
+                android:id="@+id/btn_time_out"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="time out" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="sign in" />
+
+            <Button
+                android:id="@+id/btn_custom"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="custom" />
+        </LinearLayout>
+
+        <com.helper.widgets.statelayout.StateLayout xmlns:statelayout="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/state_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_button1"
+            statelayout:emptyLayout="@layout/layout_empty"
+            statelayout:errorLayout="@layout/layout_error"
+            statelayout:loadingLayout="@layout/layout_loading"
+            statelayout:loginLayout="@layout/layout_login"
+            statelayout:noNetworkLayout="@layout/layout_no_network"
+            statelayout:timeOutLayout="@layout/layout_time_out"
+            statelayout:useAnimation="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.helper.widgets.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintDimensionRatio="524:251"
+                    app:layout_constraintTop_toTopOf="parent"
+                    banner:banner_auto_loop="false"
+                    banner:banner_indicator_normal_color="@android:color/white"
+                    banner:banner_indicator_selected_color="@color/colorPrimary" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/banner"
+                    app:layout_constraintVertical_weight="1"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.helper.widgets.statelayout.StateLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_custom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/state_layout"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="额外添加的界面" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

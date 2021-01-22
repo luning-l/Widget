@@ -37,7 +37,7 @@ public class StateLayout extends FrameLayout implements IShowView {
     private View loginView;
 
     private View currentShowingView;
-    private boolean useAnimation = true;
+    private boolean useAnimation = false;
     private ViewAnimProvider viewAnimProvider;
     private OnViewRefreshListener mListener;
 
@@ -69,6 +69,7 @@ public class StateLayout extends FrameLayout implements IShowView {
         handleLayout(context, errorLayout, ERROR);
         int noNetworkLayout = a.getResourceId(R.styleable.StateLayout_noNetworkLayout, -1);
         handleLayout(context, noNetworkLayout, NO_NETWORK);
+        useAnimation = a.getBoolean(R.styleable.StateLayout_useAnimation, false);
         a.recycle();
     }
 
@@ -115,41 +116,41 @@ public class StateLayout extends FrameLayout implements IShowView {
         super.addView(child);
     }
 
-//    @Override
-//    public void addView(View child, int index) {
-//        checkIsContentView(child);
-//        super.addView(child, index);
-//    }
-//
-//    @Override
-//    public void addView(View child, int index, ViewGroup.LayoutParams params) {
-//        checkIsContentView(child);
-//        super.addView(child, index, params);
-//    }
-//
-//    @Override
-//    public void addView(View child, ViewGroup.LayoutParams params) {
-//        checkIsContentView(child);
-//        super.addView(child, params);
-//    }
-//
-//    @Override
-//    public void addView(View child, int width, int height) {
-//        checkIsContentView(child);
-//        super.addView(child, width, height);
-//    }
-//
-//    @Override
-//    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params) {
-//        checkIsContentView(child);
-//        return super.addViewInLayout(child, index, params);
-//    }
-//
-//    @Override
-//    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
-//        checkIsContentView(child);
-//        return super.addViewInLayout(child, index, params, preventRequestLayout);
-//    }
+    @Override
+    public void addView(View child, int index) {
+        checkIsContentView(child);
+        super.addView(child, index);
+    }
+
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+        checkIsContentView(child);
+        super.addView(child, index, params);
+    }
+
+    @Override
+    public void addView(View child, ViewGroup.LayoutParams params) {
+        checkIsContentView(child);
+        super.addView(child, params);
+    }
+
+    @Override
+    public void addView(View child, int width, int height) {
+        checkIsContentView(child);
+        super.addView(child, width, height);
+    }
+
+    @Override
+    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params) {
+        checkIsContentView(child);
+        return super.addViewInLayout(child, index, params);
+    }
+
+    @Override
+    protected boolean addViewInLayout(View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
+        checkIsContentView(child);
+        return super.addViewInLayout(child, index, params, preventRequestLayout);
+    }
 
     @Override
     public void showLoginView() {
@@ -200,7 +201,6 @@ public class StateLayout extends FrameLayout implements IShowView {
         currentShowingView = view;
     }
 
-
     public boolean isUseAnimation() {
         return useAnimation;
     }
@@ -222,6 +222,7 @@ public class StateLayout extends FrameLayout implements IShowView {
     public interface OnViewRefreshListener {
         //刷新界面
         void refreshClick();
+
         //登录点击
         void loginClick();
     }

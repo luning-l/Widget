@@ -50,5 +50,7 @@
         <attr name="loginLayout" format="reference" />
         <!-- 加载提示布局 -->
         <attr name="loadingLayout" format="reference" />
+        <!-- 是否使用动画 -->
+        <attr name="useAnimation" format="boolean" />
     </declare-styleable>
 </resources>

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--StateLayout-->
+    <color name="content_color">#343434</color>
+    <color name="tip_color">#6C6C6C</color>
+    <color name="retry_color">#C0C0C0</color>
+
 </resources>

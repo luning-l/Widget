@@ -30,6 +30,7 @@ import com.helper.widgets.banner.listener.OnPageChangeListener;
 import com.helper.widgets.banner.util.BannerUtils;
 import com.helper.widgets.brvah.BaseQuickAdapter;
 import com.helper.widgets.brvah.BaseViewHolder;
+import com.helper.widgets.statelayout.StateLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
@@ -51,6 +53,10 @@ public class MainActivity extends BaseActivity {
     Banner banner;
     @BindView(R.id.rv)
     RecyclerView mRecyclerView;
+    @BindView(R.id.state_layout)
+    StateLayout stateLayout;
+    @BindView(R.id.rl_custom)
+    View customView;
 
     private List<String> bannerList;
     private BaseQuickAdapter baseQuickAdapter;
@@ -193,6 +199,36 @@ public class MainActivity extends BaseActivity {
                             Logcat.i("已拒绝");
                         }
                     }).request();
+        }
+    }
+
+    @OnClick({R.id.btn_content,R.id.btn_empty,R.id.btn_error,R.id.btn_loading,R.id.btn_time_out,R.id.btn_not_network,R.id.btn_login,R.id.btn_custom})
+    public void OnClick(View v){
+        switch (v.getId()) {
+            case R.id.btn_content:
+                stateLayout.showContentView();
+                break;
+            case R.id.btn_empty:
+                stateLayout.showEmptyView();
+                break;
+            case R.id.btn_error:
+                stateLayout.showErrorView();
+                break;
+            case R.id.btn_loading:
+                stateLayout.showLoadingView();
+                break;
+            case R.id.btn_time_out:
+                stateLayout.showTimeoutView();
+                break;
+            case R.id.btn_not_network:
+                stateLayout.showNoNetworkView();
+                break;
+            case R.id.btn_login:
+                stateLayout.showLoginView();
+                break;
+            case R.id.btn_custom:
+                stateLayout.showCustomView(customView);
+                break;
         }
     }
 }
