@@ -39,7 +39,6 @@ public class StateLayout extends FrameLayout implements IShowView {
     private View currentShowingView;
     private boolean useAnimation = false;
     private ViewAnimProvider viewAnimProvider;
-    private OnViewRefreshListener mListener;
 
     public StateLayout(@NonNull Context context) {
         this(context, null);
@@ -219,20 +218,51 @@ public class StateLayout extends FrameLayout implements IShowView {
         return viewAnimProvider;
     }
 
-    public interface OnViewRefreshListener {
-        //刷新界面
-        void refreshClick();
-
-        //登录点击
-        void loginClick();
+    public View getEmptyView() {
+        return emptyView;
     }
 
-    public OnViewRefreshListener getRefreshLListener() {
-        return mListener;
+    public void setEmptyView(View emptyView) {
+        this.emptyView = emptyView;
     }
 
-    public void setRefreshListener(OnViewRefreshListener listener) {
-        this.mListener = listener;
+    public View getErrorView() {
+        return errorView;
     }
 
+    public void setErrorView(View errorView) {
+        this.errorView = errorView;
+    }
+
+    public View getLoadingView() {
+        return loadingView;
+    }
+
+    public void setLoadingView(View loadingView) {
+        this.loadingView = loadingView;
+    }
+
+    public View getTimeOutView() {
+        return timeOutView;
+    }
+
+    public void setTimeOutView(View timeOutView) {
+        this.timeOutView = timeOutView;
+    }
+
+    public View getNotNetworkView() {
+        return notNetworkView;
+    }
+
+    public void setNotNetworkView(View notNetworkView) {
+        this.notNetworkView = notNetworkView;
+    }
+
+    public View getLoginView() {
+        return loginView;
+    }
+
+    public void setLoginView(View loginView) {
+        this.loginView = loginView;
+    }
 }
