@@ -110,23 +110,30 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <com.helper.widgets.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/banner"
+                <FrameLayout
+                    android:id="@+id/banner_parent"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintDimensionRatio="524:251"
-                    app:layout_constraintTop_toTopOf="parent"
-                    banner:banner_auto_loop="false"
-                    banner:banner_indicator_normal_color="@android:color/white"
-                    banner:banner_indicator_selected_color="@color/colorPrimary" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </FrameLayout>
+<!--                <com.helper.widgets.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"-->
+<!--                    android:id="@+id/banner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    app:layout_constraintDimensionRatio="524:251"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    banner:banner_auto_loop="false"-->
+<!--                    banner:banner_indicator_normal_color="@android:color/white"-->
+<!--                    banner:banner_indicator_selected_color="@color/colorPrimary" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/banner"
+                    app:layout_constraintTop_toBottomOf="@id/banner_parent"
                     app:layout_constraintVertical_weight="1"
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>

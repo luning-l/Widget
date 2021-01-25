@@ -1,8 +1,10 @@
 package com.eryanet.widget;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -49,7 +51,9 @@ public class MainActivity extends BaseActivity {
         BarUtils.setStatusBarCustom(fakeStatusBar, isDecor);
     }
 
-    @BindView(R.id.banner)
+    @BindView(R.id.banner_parent)
+    FrameLayout bannerParent;
+    //    @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.rv)
     RecyclerView mRecyclerView;
@@ -102,6 +106,10 @@ public class MainActivity extends BaseActivity {
         if (bannerList == null) {
             bannerList = new ArrayList<>();
         }
+        banner = new Banner(this);
+        banner.setIsInfiniteLoop(true);
+        banner.setIsAutoLoop(true);
+        bannerParent.addView(banner);
 
         banner.setImmediateCallBack(true);
         banner.addOnPageChangeListener(new OnPageChangeListener() {
@@ -134,6 +142,8 @@ public class MainActivity extends BaseActivity {
         banner.setIndicator(new RectangleIndicator(Utils.getApp()));
         banner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
         banner.setIndicatorNormalWidth((int) BannerUtils.dp2px(15));
+        banner.setIndicatorNormalColor(Color.WHITE);
+        banner.setIndicatorSelectedColor(getResources().getColor(R.color.colorPrimary));
         banner.setIndicatorRadius(0);
         banner.setOnBannerListener((data, position) -> {
             Logcat.i("OnBannerClick: " + position);
@@ -149,6 +159,8 @@ public class MainActivity extends BaseActivity {
         }
         bannerList.clear();
         bannerList.addAll(list);
+        Logcat.w("updateBanner initBanner........");
+        initBanner();
     }
 
     private void initRecyclerView() {
@@ -202,8 +214,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_content,R.id.btn_empty,R.id.btn_error,R.id.btn_loading,R.id.btn_time_out,R.id.btn_not_network,R.id.btn_login,R.id.btn_custom})
-    public void OnClick(View v){
+    @OnClick({R.id.btn_content, R.id.btn_empty, R.id.btn_error, R.id.btn_loading, R.id.btn_time_out, R.id.btn_not_network, R.id.btn_login, R.id.btn_custom})
+    public void OnClick(View v) {
         switch (v.getId()) {
             case R.id.btn_content:
                 stateLayout.showContentView();

@@ -109,7 +109,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
     private boolean isImmediateCallBack = false;
 
     @Retention(SOURCE)
-    @IntDef( {HORIZONTAL, VERTICAL})
+    @IntDef({HORIZONTAL, VERTICAL})
     public @interface Orientation {
     }
 
@@ -486,6 +486,10 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
         return mIsInfiniteLoop;
     }
 
+    public void setIsInfiniteLoop(boolean mIsInfiniteLoop) {
+        this.mIsInfiniteLoop = mIsInfiniteLoop;
+    }
+
     public BA getAdapter() {
         if (mAdapter == null) {
             LogUtils.e(getContext().getString(R.string.banner_adapter_use_error));
@@ -522,6 +526,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
     /**
      * 是否要拦截事件
+     *
      * @param intercept
      * @return
      */
@@ -532,6 +537,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
     /**
      * 跳转到指定位置（最好在设置了数据后在调用，不然没有意义）
+     *
      * @param position
      * @return
      */
@@ -541,6 +547,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
     /**
      * 跳转到指定位置（最好在设置了数据后在调用，不然没有意义）
+     *
      * @param position
      * @param smoothScroll
      * @return
@@ -630,6 +637,9 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
         return this;
     }
 
+    public void setIsAutoLoop(boolean mIsAutoLoop) {
+        this.mIsAutoLoop = mIsAutoLoop;
+    }
 
     /**
      * 设置轮播间隔时间
@@ -701,12 +711,13 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
     /**
      * 设置banner的适配器
+     *
      * @param adapter
      * @param isInfiniteLoop 是否支持无限循环
      * @return
      */
     public Banner setAdapter(BA adapter, boolean isInfiniteLoop) {
-        mIsInfiniteLoop=isInfiniteLoop;
+        mIsInfiniteLoop = isInfiniteLoop;
         setInfiniteLoop();
         setAdapter(adapter);
         return this;
@@ -771,6 +782,7 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
 
     /**
      * 是否立即回调
+     *
      * @param immediateCallBack
      * @return
      */
@@ -814,11 +826,11 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
      * 为banner添加画廊效果
      *
      * @param leftItemWidth  item左展示的宽度,单位dp
-     * @param rightItemWidth  item右展示的宽度,单位dp
-     * @param pageMargin 页面间距,单位dp
+     * @param rightItemWidth item右展示的宽度,单位dp
+     * @param pageMargin     页面间距,单位dp
      */
     public Banner setBannerGalleryEffect(int leftItemWidth, int rightItemWidth, int pageMargin) {
-        return setBannerGalleryEffect(leftItemWidth,rightItemWidth, pageMargin, .85f);
+        return setBannerGalleryEffect(leftItemWidth, rightItemWidth, pageMargin, .85f);
     }
 
     /**
@@ -836,9 +848,9 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
      * 为banner添加画廊效果
      *
      * @param leftItemWidth  item左展示的宽度,单位dp
-     * @param rightItemWidth  item右展示的宽度,单位dp
-     * @param pageMargin 页面间距,单位dp
-     * @param scale      缩放[0-1],1代表不缩放
+     * @param rightItemWidth item右展示的宽度,单位dp
+     * @param pageMargin     页面间距,单位dp
+     * @param scale          缩放[0-1],1代表不缩放
      */
     public Banner setBannerGalleryEffect(int leftItemWidth, int rightItemWidth, int pageMargin, float scale) {
         if (pageMargin > 0) {
