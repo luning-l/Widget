@@ -28,7 +28,6 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.helper.widgets.R;
 import com.helper.widgets.banner.adapter.BannerAdapter;
 import com.helper.widgets.banner.config.BannerConfig;
@@ -553,6 +552,18 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
      * @return
      */
     public Banner setCurrentItem(int position, boolean smoothScroll) {
+        if (position == getViewPager2().getCurrentItem()){
+            if (isImmediateCallBack){
+                isImmediateCallBack = false;
+                int realPosition = BannerUtils.getRealPosition(isInfiniteLoop(), position, getRealCount());
+                if (mOnPageChangeListener != null) {
+                    mOnPageChangeListener.onPageSelected(realPosition);
+                }
+                if (mIndicator != null) {
+                    mIndicator.onPageSelected(realPosition);
+                }
+            }
+        }
         getViewPager2().setCurrentItem(position, smoothScroll);
         return this;
     }
@@ -579,6 +590,10 @@ public class Banner<T, BA extends BannerAdapter> extends FrameLayout implements 
     public Banner setStartPosition(int mStartPosition) {
         this.mStartPosition = mStartPosition;
         return this;
+    }
+
+    public int getStartPosition() {
+        return mStartPosition;
     }
 
     /**

@@ -51,9 +51,9 @@ public class MainActivity extends BaseActivity {
         BarUtils.setStatusBarCustom(fakeStatusBar, isDecor);
     }
 
-    @BindView(R.id.banner_parent)
-    FrameLayout bannerParent;
-    //    @BindView(R.id.banner)
+    //    @BindView(R.id.banner_parent)
+//    FrameLayout bannerParent;
+    @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.rv)
     RecyclerView mRecyclerView;
@@ -106,11 +106,10 @@ public class MainActivity extends BaseActivity {
         if (bannerList == null) {
             bannerList = new ArrayList<>();
         }
-        banner = new Banner(this);
-        banner.setIsInfiniteLoop(true);
-        banner.setIsAutoLoop(true);
-        bannerParent.addView(banner);
-
+//        banner = new Banner(this);
+//        banner.setIsInfiniteLoop(true);
+//        banner.setIsAutoLoop(false);
+//        bannerParent.addView(banner);
         banner.setImmediateCallBack(true);
         banner.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
@@ -120,7 +119,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Logcat.e("onPageSelected: " + position);
+                Logcat.i("onPageSelected: " + position);
             }
 
             @Override
@@ -159,8 +158,8 @@ public class MainActivity extends BaseActivity {
         }
         bannerList.clear();
         bannerList.addAll(list);
-        Logcat.w("updateBanner initBanner........");
-        initBanner();
+        banner.setImmediateCallBack(true);
+        banner.setDatas(DataBean.getTestData3());
     }
 
     private void initRecyclerView() {
@@ -219,6 +218,9 @@ public class MainActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_content:
                 stateLayout.showContentView();
+                // TODO test
+                banner.setImmediateCallBack(true);
+                banner.setCurrentItem(banner.getStartPosition(), false);
                 break;
             case R.id.btn_empty:
                 stateLayout.showEmptyView();
