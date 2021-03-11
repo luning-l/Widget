@@ -1,6 +1,7 @@
 package com.eryanet.widget;
 
 import android.Manifest;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,14 @@ import com.helper.widgets.banner.listener.OnPageChangeListener;
 import com.helper.widgets.banner.util.BannerUtils;
 import com.helper.widgets.brvah.BaseQuickAdapter;
 import com.helper.widgets.brvah.BaseViewHolder;
+import com.helper.widgets.magicindicator.MagicIndicator;
+import com.helper.widgets.magicindicator.ViewPagerHelper;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.indicators.TriangularPagerIndicator;
+import com.helper.widgets.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.helper.widgets.statelayout.StateLayout;
 
 import java.util.ArrayList;
@@ -61,6 +70,8 @@ public class MainActivity extends BaseActivity {
     StateLayout stateLayout;
     @BindView(R.id.rl_custom)
     View customView;
+    @BindView(R.id.magicindicator)
+    MagicIndicator magicIndicator;
 
     private List<String> bannerList;
     private BaseQuickAdapter baseQuickAdapter;
@@ -71,6 +82,17 @@ public class MainActivity extends BaseActivity {
             "http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
             "http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg"
     };
+    private  List<String> mDataList;
+    {
+        mDataList = new ArrayList<>();
+        mDataList.add("aaa");
+        mDataList.add("bbb");
+        mDataList.add("ccc");
+        mDataList.add("ddd");
+        mDataList.add("eee");
+        mDataList.add("fff");
+        mDataList.add("ggg");
+    }
 
     @Override
     public void initData(@Nullable Bundle bundle) {
@@ -100,6 +122,7 @@ public class MainActivity extends BaseActivity {
             strings.add(String.valueOf(i));
         }
         updateRecycleView(strings);
+//        initMagicIndicator();
     }
 
     private void initBanner() {
@@ -244,5 +267,41 @@ public class MainActivity extends BaseActivity {
                 stateLayout.showCustomView(customView);
                 break;
         }
+    }
+
+    private void initMagicIndicator() {
+        magicIndicator.setBackgroundColor(Color.WHITE);
+        CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setScrollPivotX(0.15f);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mDataList == null ? 0 : mDataList.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
+                simplePagerTitleView.setText(mDataList.get(index));
+                simplePagerTitleView.setNormalColor(Color.parseColor("#333333"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#e94220"));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                TriangularPagerIndicator indicator = new TriangularPagerIndicator(context);
+                indicator.setLineColor(Color.parseColor("#e94220"));
+                return indicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(magicIndicator, null);
     }
 }

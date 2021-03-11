@@ -9,4 +9,9 @@
     <color name="tip_color">#6C6C6C</color>
     <color name="retry_color">#C0C0C0</color>
 
+    <!--CustomTextView-->
+    <color name="red">#FF0000</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="blue">#0000ff</color>
+
 </resources>

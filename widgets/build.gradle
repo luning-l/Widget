@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.luning-l'
-version = "0.0.12"
+version = "0.0.13"
 
 android {
     compileSdkVersion 30
