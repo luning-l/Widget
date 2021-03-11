@@ -11,7 +11,6 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 
 import androidx.annotation.NonNull;
@@ -168,11 +167,9 @@ public class CustomTextView extends androidx.appcompat.widget.AppCompatTextView 
     private float calcX(String text) {
         float x;
         int gravity = getGravity() & Gravity.HORIZONTAL_GRAVITY_MASK;
-        Log.d("CustomTextView", "calcX " + gravity);
         switch (gravity) {
             case Gravity.LEFT:
                 x = 0f;
-                Log.d("CustomTextView", "LEFT " + gravity);
                 break;
             case Gravity.RIGHT:
                 x = getWidth() - mPaint.measureText(text);
@@ -189,10 +186,8 @@ public class CustomTextView extends androidx.appcompat.widget.AppCompatTextView 
         float y;
         int gravity = getGravity() & Gravity.VERTICAL_GRAVITY_MASK;
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        Log.d("CustomTextView", "calcY " + gravity);
         switch (gravity) {
             case Gravity.TOP:
-                Log.d("CustomTextView", "TOP " + gravity);
                 y = (getHeight() - (fontMetrics.bottom - fontMetrics.ascent)) / 2;
                 break;
             case Gravity.BOTTOM:
